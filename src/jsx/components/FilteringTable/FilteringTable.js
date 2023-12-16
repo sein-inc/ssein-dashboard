@@ -1,15 +1,14 @@
 import React, { useMemo } from 'react';
 import { useTable, useGlobalFilter, useFilters, usePagination } from 'react-table';
-import MOCK_DATA from './MOCK_DATA_2.json';
-import { COLUMNS } from './Columns';
 import { GlobalFilter } from './GlobalFilter';
 import './filtering.css';
 import { Link } from 'react-router-dom';
 
 
-export const FilteringTable = () => {
-	const columns = useMemo(() => COLUMNS, [])
-	const data = useMemo(() => MOCK_DATA, [])
+export const FilteringTable = ({ cols, data: array, name, sideElement, link }) => {
+	const columns = useMemo(() => cols, [])
+	const data = useMemo(() => array, [])
+
 	const tableInstance = useTable({
 		columns,
 		data,
@@ -41,8 +40,8 @@ export const FilteringTable = () => {
 		<>
 			<div className="card">
 				<div className="card-header">
-					<h4 className="card-title">Table Filtering</h4>
-					<button>Add restaurant</button>
+					<h4 className="card-title">{name}</h4>
+					{sideElement}
 				</div>
 				<div className="card-body">
 					<div className="table-responsive">
@@ -65,13 +64,16 @@ export const FilteringTable = () => {
 									prepareRow(row)
 									return (
 										<tr {...row.getRowProps()}>
-
 											{row.cells.map((cell) => {
 												return (
-													<td {...cell.getCellProps()}><Link> {cell.render('Cell')}</Link> </td>
+													<td {...cell.getCellProps()}>
+														{console.log(cell, "Cell")}
+														<Link to={`${link}/${cell.row.original.id}`}>
+															{cell.render('Cell')}
+														</Link>
+													</td>
 												)
 											})}
-
 										</tr>
 									)
 								})}
@@ -116,4 +118,3 @@ export const FilteringTable = () => {
 	)
 
 }
-export default FilteringTable;

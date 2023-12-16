@@ -4,7 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import {
     loadingToggleAction,
     signupAction,
-} from '../../store/actions/AuthActions';
+} from '../../../store/actions/AuthActions';
 // image
 import logo from "../../images/logo-full.png";
 

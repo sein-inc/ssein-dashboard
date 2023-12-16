@@ -270,15 +270,15 @@ const UiListGroup = () => {
                         <ListGroup.Item action href="#home">
                           Home
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#profile">
+                        {/* <ListGroup.Item action href="#profile">
                           Profile
-                        </ListGroup.Item>
+                        </ListGroup.Item> */}
                         <ListGroup.Item action href="#messages">
                           Messages
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#settings">
+                        {/* <ListGroup.Item action href="#settings">
                           Settings
-                        </ListGroup.Item>
+                        </ListGroup.Item> */}
                       </ListGroup>
                     </Col>
                     <Col lg="6" xl="10">

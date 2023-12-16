@@ -2,19 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { logout } from "../../../store/functions/authFuctions";
-import { useDispatch } from "react-redux";
-import HeaderSlider from './HeaderSlider';
-import profile from "../../../images/banner-img/pic-1.png";
+import { useDispatch, useSelector } from "react-redux";
 
-const LocationIcon = <i className="fa-solid fa-location-dot mx-2 " />;
-
-const Header = ({ onNote }) => {
+const Header = () => {
 	const dispatch = useDispatch();
 	const [headerFix, setheaderFix] = useState(false);
 
+	const { user } = useSelector(state => state.auth);
+
 	const onLogout = () => {
 		dispatch(logout());
-	}
+	};
 
 	useEffect(() => {
 		setTimeout(function () {
@@ -46,10 +44,10 @@ const Header = ({ onNote }) => {
 									<Dropdown className=" header-profile2 ">
 										<Dropdown.Toggle as="a" className={`nav-link i-false cursor-pointer `} id="droptoggle1">
 											<div className="header-info2 d-flex align-items-center">
-												<img src={profile} alt="" />
+												<img src={"https://media.istockphoto.com/id/1327656409/vector/user-icon-admin-profile-pictogram.jpg?s=612x612&w=0&k=20&c=SCadkvBVVRHToUEiwBL5rxE2e8XS7ch5Eizf509kWeE="} alt="" />
 												<div className="d-flex align-items-center sidebar-info">
 													<div>
-														<h6 className="font-w500 mb-0 ms-2">Joshua</h6>
+														<h6 className="font-w500 mb-0 ms-2">{user.name.split(" ")[0]}</h6>
 													</div>
 													<i className="fas fa-chevron-down"></i>
 												</div>
@@ -57,18 +55,18 @@ const Header = ({ onNote }) => {
 											</div>
 										</Dropdown.Toggle>
 										<Dropdown.Menu className="dropdown-menu-end">
-											<Link to="./app-profile" className="dropdown-item ai-icon ">
+											{/* <Link to="./app-profile" className="dropdown-item ai-icon ">
 												<svg xmlns="http://www.w3.org/2000/svg" className="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
 												<span className="ms-2">Profile</span>
-											</Link>
-											<Link to="./email-inbox" className="dropdown-item ai-icon">
+											</Link> */}
+											{/* <Link to="./email-inbox" className="dropdown-item ai-icon">
 												<svg xmlns="http://www.w3.org/2000/svg" className="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
 												<span className="ms-2">Inbox</span>
-											</Link>
-											<Link to="./edit-profile" className="dropdown-item ai-icon">
+											</Link> */}
+											{/* <Link to="./edit-profile" className="dropdown-item ai-icon">
 												<svg xmlns="http://www.w3.org/2000/svg" className="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
 												<span className="ms-2">Edit Profile</span>
-											</Link>
+											</Link> */}
 											<Link to="./message" className="dropdown-item ai-icon ">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" className="svg-main-icon">
 													<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -76,7 +74,7 @@ const Header = ({ onNote }) => {
 														<path d="M21.9999843,15.009808 L22.0249378,15 L22.0249378,19.5857864 C22.0249378,20.1380712 21.5772226,20.5857864 21.0249378,20.5857864 C20.7597213,20.5857864 20.5053674,20.4804296 20.317831,20.2928932 L18.0249378,18 L5,18 C3.34314575,18 2,16.6568542 2,15 L2,6 C2,4.34314575 3.34314575,3 5,3 L19,3 C20.6568542,3 22,4.34314575 22,6 L22,15 C22,15.0032706 21.9999948,15.0065399 21.9999843,15.009808 Z M6.16794971,10.5547002 C7.67758127,12.8191475 9.64566871,14 12,14 C14.3543313,14 16.3224187,12.8191475 17.8320503,10.5547002 C18.1384028,10.0951715 18.0142289,9.47430216 17.5547002,9.16794971 C17.0951715,8.86159725 16.4743022,8.98577112 16.1679497,9.4452998 C15.0109146,11.1808525 13.6456687,12 12,12 C10.3543313,12 8.9890854,11.1808525 7.83205029,9.4452998 C7.52569784,8.98577112 6.90482849,8.86159725 6.4452998,9.16794971 C5.98577112,9.47430216 5.86159725,10.0951715 6.16794971,10.5547002 Z" fill="var(--primary)" />
 													</g>
 												</svg>
-												<span className="ms-2">Message</span>
+												<span className="ms-2">Messages</span>
 											</Link>
 											<Link to="./notification" className="dropdown-item ai-icon ">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" className="svg-main-icon">
@@ -88,7 +86,7 @@ const Header = ({ onNote }) => {
 												</svg>
 												<span className="ms-2">Notification </span>
 											</Link>
-											<Link to="./setting" className="dropdown-item ai-icon ">
+											{/* <Link to="./setting" className="dropdown-item ai-icon ">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" className="svg-main-icon">
 													<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
 														<rect x="0" y="0" width="24" height="24" />
@@ -97,7 +95,7 @@ const Header = ({ onNote }) => {
 													</g>
 												</svg>
 												<span className="ms-2">Settings </span>
-											</Link>
+											</Link> */}
 											<button className="dropdown-item ai-icon ms-1 log-btn" onClick={onLogout}>
 												<svg xmlns="http://www.w3.org/2000/svg" className="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
 													<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line>
