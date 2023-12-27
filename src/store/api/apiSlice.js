@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://kagaba.tech' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://app.kagaba.tech' }),
     endpoints: (builder) => ({
         login: builder.mutation({
             query: (credentials) => ({
@@ -11,7 +11,16 @@ export const apiSlice = createApi({
                 body: credentials,
             }),
         }),
-    }),
+        getRestaurants: builder.query({
+            query: (data) => ({
+                url: '/admin/restaurants',
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${data.token}`,
+                },
+            }),
+        }),
+    })
 })
 
-export const { useLoginMutation } = apiSlice
+export const { useLoginMutation, useGetRestaurantsQuery } = apiSlice

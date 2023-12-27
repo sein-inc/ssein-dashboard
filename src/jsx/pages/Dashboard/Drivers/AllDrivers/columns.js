@@ -19,4 +19,10 @@ export const tableColumns = [
         accessor: 'phone',
         Filter: ColumnFilter,
     },
+    {
+        Header: 'Approved',
+        Footer: 'Approved',
+        accessor: 'approved',
+        Filter: ColumnFilter,
+    }
 ]

@@ -9,6 +9,9 @@ export const FilteringTable = ({ cols, data: array, name, sideElement, link }) =
 	const columns = useMemo(() => cols, [])
 	const data = useMemo(() => array, [])
 
+	console.log(data, "data from table")
+
+
 	const tableInstance = useTable({
 		columns,
 		data,
@@ -67,8 +70,8 @@ export const FilteringTable = ({ cols, data: array, name, sideElement, link }) =
 											{row.cells.map((cell) => {
 												return (
 													<td {...cell.getCellProps()}>
-														{console.log(cell, "Cell")}
-														<Link to={`${link}/${cell.row.original.id}`}>
+														{/* {console.log(cell, "Cell")} */}
+														<Link to={`${link}/${cell.row.original.id}`} state={{ restaurant: cell.row.original.item }}>
 															{cell.render('Cell')}
 														</Link>
 													</td>
@@ -113,7 +116,7 @@ export const FilteringTable = ({ cols, data: array, name, sideElement, link }) =
 						</div>
 					</div>
 				</div>
-			</div>
+			</div >
 		</>
 	)
 
