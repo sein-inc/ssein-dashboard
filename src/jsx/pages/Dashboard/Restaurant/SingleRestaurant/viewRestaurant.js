@@ -16,7 +16,7 @@ export const ViewSingleRestaurant = () => {
 
     useEffect(() => {
         if (location.state) {
-            setRestaurant(location.state.restaurant)
+            setRestaurant(location.state.item)
         }
     }, [location])
 

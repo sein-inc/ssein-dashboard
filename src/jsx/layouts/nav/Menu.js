@@ -20,4 +20,11 @@ export const MenuList = [
         to: 'drivers',
         hasMenu: false,
     },
+    //Orders
+    {
+        title: 'Orders',
+        iconStyle: "bi bi-inboxes-fill",
+        to: 'orders',
+        hasMenu: false,
+    },
 ]

@@ -40,12 +40,16 @@ const listBlog = [
 export const Reviews = ({ restaurant }) => {
 
     const { token } = useSelector((state) => state.auth);
+    const [page, setPage] = useState(1);
 
     const { data: reviews } = useGetRestaurantReviewsQuery({
         token,
         reviewee_type: 'restaurant',
         reviewee_id: restaurant,
+        page
     });
+
+    console.log(reviews, "reviews")
 
     return (
 

@@ -64,7 +64,34 @@ export const apiSlice = createApi({
                     Authorization: `Bearer ${data.token}`,
                 },
             })
-        })
+        }),
+        getDriverDeliveries: builder.query({
+            query: (data) => ({
+                url: `/admin/sales/deliveries?rider_id=${data.driver_id}`,
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${data.token}`,
+                },
+            })
+        }),
+        getOrders: builder.query({
+            query: (data) => ({
+                url: '/admin/sales/orders',
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${data.token}`,
+                },
+            }),
+        }),
+        getSingleOrder: builder.query({
+            query: (data) => ({
+                url: `/admin/sales/orders/${data.order_id}`,
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${data.token}`,
+                },
+            }),
+        }),
     }),
 })
 
@@ -75,5 +102,8 @@ export const {
     useGetDeliveriesQuery,
     useGetDriversQuery,
     useGetRestaurantMenuQuery,
-    useGetRestaurantReviewsQuery
+    useGetRestaurantReviewsQuery,
+    useGetDriverDeliveriesQuery,
+    useGetOrdersQuery,
+    useGetSingleOrderQuery
 } = apiSlice

@@ -1,6 +1,10 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Accordion, Dropdown } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { useGetDriverDeliveriesQuery } from '../../../../../store/api/apiSlice';
+import PageTitle from '../../../../layouts/PageTitle';
 
 //images
 import review1 from './../../../../../images/resturent-review/pic-1.jpg';
@@ -17,47 +21,55 @@ const accordData = [
     { image: order4, order: '4', btntheme: 'btn-outline-success bgl-success', status: 'Completed' },
 ];
 
-const reducer = (state, action) => {
-    switch (action.type) {
-        case 'option1':
-            return state = 'All Rating';
-        //break;
-        case 'option2':
-            return state = 'Low Rating';
-        //break;
-        case 'option3':
-            return state = 'High Rating';
-        //break;
-        default:
-            return state;
-    }
-}
-
 export const ViewSingleDriver = () => {
-    const [deliverOption, setDeliverOption] = useState('Lastest');
-    const [state, dispatch] = useReducer(reducer, 'Low Rating');
+    const location = useLocation()
+    const [driver, setDriver] = useState({})
+    const { token } = useSelector((state) => state.auth)
+
+    useEffect(() => {
+        if (location.state) {
+            setDriver(location.state.item)
+        }
+    }, [location])
+
+    const { data: deliveries } = useGetDriverDeliveriesQuery({
+        token,
+        driver_id: driver.id
+    });
+
     return (
         <>
             <div className="row">
                 <div className="col-xl-12">
+                    <PageTitle activeMenu={driver?.name} motherMenu={"Drivers"} />
+                    <div className="mb-3">
+                        {
+                            driver?.verified ?
+                                <p className="font-w500 text-primary fs-15 mb-2">Approved</p>
+                                :
+                                <p className="font-w500 text-danger fs-15 mb-2">Not Approved</p>
+                        }
+                        <p>Current Availability: {driver?.available ? "Available" : "Not available"} </p>
+                        {
+                            !driver?.verified ?
+                                <div className="d-flex">
+                                    <button type="button" className="btn btn-primary" onClick={null}>
+                                        {
+                                            // Approval loading instead of false
+                                            false ?
+                                                <i class="fa-solid fa-spinner fa-spin-pulse fa-2xs" style={{
+                                                    color: "white"
+                                                }}></i>
+                                                :
+                                                "Approve driver"
+                                        }
+                                    </button>
+                                </div> : null
+                        }
+                    </div>
+                    <h4 className="cate-title mb-2">Ongoing Order</h4>
                     <div className="card h-auto deliver-order">
                         <div className="card-body">
-                            <div className="d-flex align-items-center justify-content-between mb-4">
-                                <h4 className="cate-title mb-0">Ongoing Order</h4>
-                                <Dropdown>
-                                    <Dropdown.Toggle as="div" className="btn-link i-false">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z" stroke="#262626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
-                                            <path d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z" stroke="#262626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
-                                            <path d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z" stroke="#262626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
-                                        </svg>
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu align="end">
-                                        <Dropdown.Item>Edit</Dropdown.Item>
-                                        <Dropdown.Item>Delete</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </div>
                             <div className="row">
                                 <div className="col-xl-3 col-xxl-6 col-sm-6  border-right">
                                     <div className="mb-md-2">
@@ -146,29 +158,6 @@ export const ViewSingleDriver = () => {
                         <div className="col-xl-12">
                             <div className="d-flex align-items-center justify-content-between flex-wrap">
                                 <h4 className="cate-title">Order History</h4>
-                                <div className="d-flex align-items-center">
-                                    <Dropdown className="me-3 deliver-drop">
-                                        <Dropdown.Toggle as="div" className="form-control default-select ms-0 mb-4 border i-false deliver-drop-toggle">
-                                            {deliverOption} <i className="fas fa-chevron-down drop-toggle-icon"></i>
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item onClick={() => setDeliverOption('Lastest')}>Lastest</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setDeliverOption('Oldest')}>Oldest</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setDeliverOption('Newest')}>Newest</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-
-                                    <Dropdown className="deliver-drop">
-                                        <Dropdown.Toggle as="div" className="form-control ms-0 default-select mb-4 border deliver-drop-toggle style2 i-false">
-                                            {state} <i className="fas fa-chevron-down drop-toggle-icon" />
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item onClick={() => dispatch({ type: 'option1' })}>All Rating</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => dispatch({ type: 'option2' })}>Low Rating</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => dispatch({ type: 'option3' })}>High Rating</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </div>
                             </div>
                             <div className="card h-auto">
                                 <div className="card-body p-2">

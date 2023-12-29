@@ -17,6 +17,7 @@ import Footer from "./layouts/Footer";
 
 import { ViewRestaurants, ViewSingleRestaurant } from "./pages/Dashboard/Restaurant";
 import { ViewDrivers, ViewSingleDriver } from "./pages/Dashboard/Drivers";
+import { ViewOrders, ViewSingleOrder } from "./pages/Dashboard/Orders";
 import { Statistics } from "./pages/Dashboard/Stats";
 
 import ScrollToTop from "./layouts/ScrollToTop";
@@ -148,9 +149,13 @@ const DashboardRoutes = () => {
 
     //Drivers
     { url: "/drivers", component: <ViewDrivers /> },
-    {url: "/driver/:id", component: <ViewSingleDriver />},
+    { url: "/driver/:id", component: <ViewSingleDriver /> },
     // { url: "deliver-order", component: <DeliverOrder /> },
     // { url: "feedback", component: <Feedback /> },
+
+    //Orders
+    { url: "/orders", component: <ViewOrders /> },
+    { url: "/orders/:id", component: <ViewSingleOrder /> },
 
     /////Demo
     // { url: "container-wide", component: <Theme1 /> },

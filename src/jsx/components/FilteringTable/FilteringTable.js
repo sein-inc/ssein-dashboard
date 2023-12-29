@@ -71,7 +71,7 @@ export const FilteringTable = ({ cols, data: array, name, sideElement, link }) =
 												return (
 													<td {...cell.getCellProps()}>
 														{/* {console.log(cell, "Cell")} */}
-														<Link to={`${link}/${cell.row.original.id}`} state={{ restaurant: cell.row.original.item }}>
+														<Link to={`${link}/${cell.row.original.id}`} state={{ item: cell.row.original.item }}>
 															{cell.render('Cell')}
 														</Link>
 													</td>
