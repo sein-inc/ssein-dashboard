@@ -57,7 +57,7 @@ class ApexPie4 extends React.Component {
           series={this.state.series}
           type="polarArea"
           height={251}
-          // width={300}
+        // width={300}
         />
       </div>
     );

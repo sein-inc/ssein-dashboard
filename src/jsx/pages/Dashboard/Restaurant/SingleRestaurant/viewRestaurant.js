@@ -5,10 +5,14 @@ import { Reviews } from "./reviews"
 import { Link } from "react-router-dom"
 import PageTitle from "../../../../layouts/PageTitle"
 import { useLocation } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { useApproveRestaurantMutation } from "../../../../../store/api/apiSlice"
+import { toast } from "react-toastify";
 
 export const ViewSingleRestaurant = () => {
     const location = useLocation()
     const [restaurant, setRestaurant] = useState({})
+    const { token } = useSelector((state) => state.auth)
 
     useEffect(() => {
         if (location.state) {
@@ -16,7 +20,44 @@ export const ViewSingleRestaurant = () => {
         }
     }, [location])
 
-    console.log(restaurant, "restaurant")
+    const [approveRestaurant,
+        {
+            isLoading: isApprovalLoading,
+            isError: isApprovalError,
+            isSuccess: isApprovalSuccess
+        }
+    ] = useApproveRestaurantMutation()
+
+    const approve = () => {
+        approveRestaurant({ phone: restaurant?.manager_details?.phone, token })
+    }
+
+    useEffect(() => {
+        if (isApprovalSuccess) {
+            setRestaurant({ ...restaurant, verified: true })
+            toast.success("Restaurant approved successfully", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        }
+    }, [isApprovalSuccess])
+
+    useEffect(() => {
+        if (isApprovalError) {
+            toast.error("Error approving restaurant, try again.", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        }
+    }, [isApprovalError])
 
     return (
         <>
@@ -42,18 +83,25 @@ export const ViewSingleRestaurant = () => {
                 {
                     !restaurant?.verified ?
                         <div className="d-flex">
-                            <button type="button" className="btn btn-primary" onClick={() => null}>
-                                Approve restaurant
+                            <button type="button" className="btn btn-primary" onClick={approve}>
+                                {
+                                    isApprovalLoading ?
+                                        <i class="fa-solid fa-spinner fa-spin-pulse fa-2xs" style={{
+                                            color: "white"
+                                        }}></i>
+                                        :
+                                        "Approve restaurant"
+                                }
                             </button>
                         </div> : null
                 }
             </div>
             <h4 className="cate-title mb-sm-3 mb-2 mt-xl-0 mt-3">Orders</h4>
-            <Orders />
+            <Orders restaurant={restaurant.id} />
             <h4 className="cate-title mb-sm-3 mb-2 mt-xl-0 mt-3">Menu</h4>
-            <Menu />
+            <Menu restaurant={restaurant.id} />
             <h4 className="cate-title mb-sm-3 mb-2 mt-xl-0 mt-3">Reviews</h4>
-            <Reviews />
+            <Reviews restaurant={restaurant.id} />
         </>
     )
 }
