@@ -44705,21 +44705,11 @@ table.dataTable.display tbody td {
   margin-top: 2.5rem;
   position: relative;
 }
-.plus-box:before {
-  position: absolute;
-  content: "";
-  top: 1.2rem;
-  right: 0;
-  background-image: url(../images/Vector.png);
-  background-repeat: no-repeat;
-  height: 3rem;
-  width: 3rem;
-}
+
 .plus-box:after {
   position: absolute;
   bottom: 0;
   content: "";
-  background-image: url(../images/Ellipse.png);
   right: 0;
   width: 40%;
   background-repeat: no-repeat;
