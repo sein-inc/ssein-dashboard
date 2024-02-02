@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import PageTitle from "../../../../layouts/PageTitle"
 import { Link, useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
@@ -13,8 +13,6 @@ export const ViewSingleOrder = () => {
         token,
         order_id: id
     })
-
-    console.log(order, "order")
 
     return (
         <>
@@ -72,7 +70,6 @@ export const ViewSingleOrder = () => {
                                 </div>
                                 <div className="col-xl-2"></div>
                             </div>
-                            {/* <h4 className="cate-title mb-sm-3 mb-2 mt-3">Deliveries</h4> */}
                             <div className="order-menu style-1 mt-3">
                                 <h4>Order Menu</h4>
                                 {
@@ -109,15 +106,6 @@ export const ViewSingleOrder = () => {
                     </div>
                 </div>
             </div >
-
-
-
-            {/* <h4 className="cate-title mb-sm-3 mb-2 mt-xl-0 mt-3">Orders</h4>
-            <Orders orders={orders.id} />
-            <h4 className="cate-title mb-sm-3 mb-2 mt-xl-0 mt-3">Menu</h4>
-            <Menu orders={orders.id} />
-            <h4 className="cate-title mb-sm-3 mb-2 mt-xl-0 mt-3">Reviews</h4>
-            <Reviews orders={orders.id} /> */}
         </>
     )
 }

@@ -5,20 +5,6 @@ import { useGetDeliveriesQuery } from '../../../../../store/api/apiSlice';
 import { useSelector } from "react-redux";
 import moment from 'moment';
 
-import pic1 from './../../../../../images/chat-img/orders-img/pic-1.jpg';
-import review1 from './../../../../../images/popular-img/review-img/pic-1.jpg';
-import review2 from './../../../../../images/popular-img/review-img/pic-2.jpg';
-import pop1 from './../../../../../images/popular-img/pic-1.jpg';
-
-const orderTab = [
-    { order: '1', title: 'Prepared', title2: 'Delivered' },
-    { order: '2', title: 'Prepared', title2: 'Delivered' },
-    { order: '3', title: 'Prepared', title2: 'Delivered' },
-    { order: '4', title: 'Prepared', title2: 'Delivered' },
-    { order: '5', title: 'Prepared', title2: 'Delivered' },
-    { order: '6', title: 'Prepared', title2: 'Delivered' },
-];
-
 export const Orders = ({ restaurant }) => {
 
     const { token } = useSelector((state) => state.auth)

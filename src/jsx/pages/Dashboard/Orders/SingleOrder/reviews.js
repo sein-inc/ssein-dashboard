@@ -1,41 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import { Tab, Nav } from 'react-bootstrap';
+import { Tab } from 'react-bootstrap';
 import { useSelector } from "react-redux"
 import { useGetRestaurantReviewsQuery } from '../../../../../store/api/apiSlice';
 
-import review1 from './../../../../../images/resturent-review/pic-1.jpg';
-import review2 from './../../../../../images/resturent-review/pic-2.jpg';
-import review3 from './../../../../../images/resturent-review/pic-3.jpg';
-import review4 from './../../../../../images/resturent-review/pic-4.jpg';
-import review5 from './../../../../../images/resturent-review/pic-5.jpg';
-import review6 from './../../../../../images/resturent-review/pic-6.jpg';
-import review7 from './../../../../../images/resturent-review/pic-7.jpg';
-import review8 from './../../../../../images/resturent-review/pic-8.jpg';
-import pop from './../../../../../images/popular-img/pic-1.jpg';
-import chatimg1 from './../../../../../images/chat-img/pic-1.jpg';
-import chatimg2 from './../../../../../images/chat-img/pic-2.jpg';
-import chatimg3 from './../../../../../images/chat-img/pic-3.jpg';
-import chatimg4 from './../../../../../images/chat-img/pic-4.jpg';
 import moment from 'moment';
-
-const gridBlog = [
-    { image: review1 },
-    { image: review2 },
-    { image: review3 },
-    { image: review4 },
-    { image: review5 },
-    { image: review6 },
-    { image: review7 },
-    { image: review8 },
-];
-
-const listBlog = [
-    { id: 'custom22', image: chatimg1 },
-    { id: 'custom23', image: chatimg2 },
-    { id: 'custom24', image: chatimg3 },
-    { id: 'custom25', image: chatimg4 },
-];
 
 export const Reviews = ({ restaurant }) => {
 
@@ -48,8 +17,6 @@ export const Reviews = ({ restaurant }) => {
         reviewee_id: restaurant,
         page
     });
-
-    console.log(reviews, "reviews")
 
     return (
 
@@ -79,12 +46,6 @@ export const Reviews = ({ restaurant }) => {
                                             <div className="col-xl-3 col-xxl-4 col-sm-6" key={ind}>
                                                 <div className="card">
                                                     <div className="card-body">
-                                                        <div className="restro-review d-flex align-items-center border-bottom mb-4  pb-4">
-                                                            <img src={"https://cdn.dribbble.com/users/184987/screenshots/10386639/minna_cute_orange_illustration.jpg"} alt="" />
-                                                            <div>
-                                                                <h4 className="font-w500">User name</h4>
-                                                            </div>
-                                                        </div>
                                                         <div className="recent-review d-flex align-items-center">
                                                             <div>
                                                                 <ul className="d-flex mb-2">

@@ -44589,26 +44589,11 @@ table.dataTable.display tbody td {
   color: #fff;
   border-radius: 0.5rem;
 }
-.card.dishe-bx .common .plus .sub-bx {
-  background-image: url("../images/banner-img/plus.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 0.313rem;
-  height: 0.313rem;
-  width: 40%;
-  height: 40%;
-  background-position: center;
-  display: inline-block;
-  text-align: center;
-}
+
 .card.dishe-bx .common .plus.active {
   background-color: #1fbf75;
 }
-.card.dishe-bx .common .plus.active .sub-bx {
-  background-image: url("../images/banner-img/Group.png");
-  width: 80%;
-  height: 40%;
-}
+
 
 .card.dishe-bx .common h4,
 .card.dishe-bx .common .h4 {
@@ -44659,25 +44644,9 @@ table.dataTable.display tbody td {
   color: #fff;
   border-radius: 0.5rem;
 }
-.card.review .common .plus .sub-bx {
-  background-image: url("../images/banner-img/plus.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 0.313rem;
-  height: 0.313rem;
-  width: 40%;
-  height: 40%;
-  background-position: center;
-  display: inline-block;
-  text-align: center;
-}
+
 .card.review .common .plus.active {
   background-color: #1fbf75;
-}
-.card.review .common .plus.active .sub-bx {
-  background-image: url("../images/banner-img/Group.png");
-  width: 80%;
-  height: 40%;
 }
 
 .card.review.style-1 img {
@@ -45263,30 +45232,6 @@ table.dataTable.display tbody td {
   .blance-card-1 .dlab-content {
     width: 58%;
   }
-}
-.blance-card-1:after {
-  background-image: url(../images/banner-img/ellipse.png);
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-position: left bottom;
-  z-index: -1;
-}
-.blance-card-1:before {
-  background-image: url(../images/banner-img/ellipse-1.png);
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-position: right top;
-  z-index: -1;
 }
 
 .order-check {

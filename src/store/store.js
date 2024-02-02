@@ -1,25 +1,19 @@
-import { applyMiddleware, combineReducers, compose, createStore, } from 'redux';
-import PostsReducer from './reducers/PostsReducer';
-import thunk from 'redux-thunk';
-import { AuthReducer } from './reducers/AuthReducer';
-import todoReducers from './reducers/Reducers';
+import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
 // Redux toolkit imports
-import { apiSlice } from './api/apiSlice';
-import authSlice from './states/authSlice';
+import { apiSlice } from "./api/apiSlice";
+import authSlice from "./states/authSlice";
 
-
-const middleware = applyMiddleware(thunk, apiSlice.middleware);
-
-const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const reducers = combineReducers({
-    posts: PostsReducer,
-    auth: AuthReducer,
-    todoReducers,
+export const store = configureStore({
+  reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: authSlice,
+  },
+  // Adding the api middleware enables caching, invalidation, polling,
+  // and other useful features of `rtk-query`.
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
-export const store = createStore(reducers, composeEnhancers(middleware));
+setupListeners(store.dispatch);

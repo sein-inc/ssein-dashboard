@@ -1,2 +1,2 @@
-export * from "./FilteringTable/FilteringTable"
-export * from "./FilteringTable/ColumnFilter"
+export * from "./FilteringTable/FilteringTable";
+export * from "./FilteringTable/ColumnFilter";

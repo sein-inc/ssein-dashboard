@@ -11,7 +11,6 @@ import {
 } from "react-bootstrap";
 import { useDispatch } from "react-redux"
 import { useLoginMutation } from '../../store/api/apiSlice';
-import logo from '../../images/logo-full.png'
 import bgimage from '../../images/login-img/pic-5.jpg';
 import { checkLogin } from '../../store/functions/authFuctions';
 
